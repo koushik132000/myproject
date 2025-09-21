@@ -1,1 +1,0 @@
-# creating a file to calculate the convergence of root mean square end to end distance

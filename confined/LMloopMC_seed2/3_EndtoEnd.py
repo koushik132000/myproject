@@ -1,1 +1,0 @@
-C:/Users/Koushik Sai/OneDrive/Desktop/polymers/confined/ReCOMRgconfined/3_EndtoEnd.py

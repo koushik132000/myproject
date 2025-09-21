@@ -1,1 +1,0 @@
-C:/Users/Koushik Sai/OneDrive/Desktop/polymers/PBC/ReCOMRgPBC/7_LM_loopPBC_MC_new.c
