@@ -1,0 +1,1 @@
+C:/Users/Koushik Sai/OneDrive/Desktop/polymers/Zwall/ReCOMRgZwall/5_RGZW.py

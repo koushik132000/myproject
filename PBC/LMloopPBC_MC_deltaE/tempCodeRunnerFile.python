@@ -1,0 +1,63 @@
+import math
+import pandas as pd
+import os
+
+cwd = os.getcwd()
+print("Working in", cwd)
+
+ipname = 'mchains'
+opname = 'rend'
+
+xmax, ymax, zmax = 7.0, 7.0, 20.0
+nb = 20         # beads per chain
+nchains = 36    # chains per file
+
+for i in range(0, 31):
+    infname = f"{ipname}{i}.csv"
+    pos = pd.read_csv(infname)
+
+    opfname = f"{opname}{i}.csv"
+    f = open(opfname, "w")
+
+    for c in range(nchains):
+        base = c*nb
+
+        # wrapped first bead (also our unwrapped reference)
+        x0 = pos.at[base, 'x']; y0 = pos.at[base, 'y']; z0 = pos.at[base, 'z']
+
+        # start unwrapped coords at the first bead
+        xu = x0; yu = y0; zu = z0
+
+        # we'll traverse bonds, always using MIC for each bond vector
+        px = x0; py = y0; pz = z0  # previous wrapped bead
+
+        for k in range(1, nb):
+            xk = pos.at[base + k, 'x']
+            yk = pos.at[base + k, 'y']
+            zk = pos.at[base + k, 'z']
+
+            dx = xk - px
+            dy = yk - py
+            dz = zk - pz
+
+            # minimum image for each bond (fold into [-L/2, +L/2])
+            dx = dx - xmax * round(dx / xmax)
+            dy = dy - ymax * round(dy / ymax)
+            dz = dz - zmax * round(dz / zmax)
+
+            # accumulate to build unwrapped coordinates
+            xu += dx; yu += dy; zu += dz
+
+            # advance
+            px = xk; py = yk; pz = zk
+
+        # end-to-end vector from unwrapped endpoints
+        Rx = xu - x0
+        Ry = yu - y0
+        Rz = zu - z0
+
+        R = math.sqrt(Rx*Rx + Ry*Ry + Rz*Rz)
+        f.write(f"{R}\n")
+
+    f.close()
+    print("Finished file", i)
