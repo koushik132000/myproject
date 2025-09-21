@@ -1,0 +1,32 @@
+#!/bin/bash
+# fix_symlinks.sh
+
+BASE="/home/laxmi/Desktop/koushik/myproject/PBC"
+SHARED="../ReCOMRgPBC"
+
+# Define files as an array (space-separated, not comma-separated)
+FILES=("3_EndtoEndPBC.py" "4_COMPBC.py" "5_RGPBC.py" "bond_bond_Re.py")
+
+# List of project folders
+PROJECTS=(
+    "$BASE/LMloopPBC_ideal_S1"
+    "$BASE/LMloopPBC_ideal_S2"
+    "$BASE/LMloopPBC_MC_seed1"
+    "$BASE/LMloopPBC_MC_seed2"
+)
+
+# Loop through projects and files
+for project in "${PROJECTS[@]}"; do
+  for file in "${FILES[@]}"; do
+    link="$project/$file"
+    target="$SHARED/$file"
+
+    # Remove old file/link if exists
+    [ -e "$link" ] && rm -f "$link"
+
+    # Create symlink
+    (cd "$project" && ln -s "$target" "$file")
+
+    echo "Created symlink: $link -> $target"
+  done
+done

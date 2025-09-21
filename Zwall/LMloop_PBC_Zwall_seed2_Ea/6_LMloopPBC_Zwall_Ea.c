@@ -1,0 +1,1 @@
+C:/Users/Koushik Sai/OneDrive/Desktop/polymers/Zwall/ReCOMRgZwall/6_LMloopPBC_Zwall_Ea.c
