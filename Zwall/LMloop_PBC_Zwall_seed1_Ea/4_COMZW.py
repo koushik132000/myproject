@@ -1,1 +1,1 @@
-../Zwall/ReCOMRgPBC/4_COMZW.py
+../../Zwall/ReCOMRgZwall/4_COMZW.py

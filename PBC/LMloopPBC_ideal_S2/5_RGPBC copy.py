@@ -73,7 +73,7 @@ for i in range (0,41):
 			sxs[c]+=xdiff*xdiff
 			sys[c]+=ydiff*ydiff
 			szs[c]+=zdiff*zdiff
-		print(sxs[c],sys[c],szs[c])			
+		print(sxs[c],sys[c],szs[c])
 	for c in range(36):
 		crg[c]=math.sqrt(sxs[c]/20+sys[c]/20+szs[c]/20) #Rg for each chain
 		Rgx[c] = math.sqrt(sxs[c]/20)

@@ -1,1 +1,1 @@
-C:/Users/Koushik Sai/OneDrive/Desktop/polymers/chain_ini_ran/ran2.h
+../../chain_ini_ran/ran2.h

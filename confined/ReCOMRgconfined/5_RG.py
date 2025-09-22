@@ -31,7 +31,7 @@ for i in range (0,41):
 	Rgz=array.array('d',(0.0 for c in range(0,36)))
 	
     # Reading the center of mass files 
-	infcom=icom+str(i)+'.'+'csv'
+	infcom=icom+"_"+str(i)+'.'+'csv'
 	com=pd.read_csv(infcom,dtype={"c":int,"x":float,"y":float,"z":float})
 	comx=com[['x']]
 	comy=com[['y']]

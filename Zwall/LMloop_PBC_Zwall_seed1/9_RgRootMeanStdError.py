@@ -1,1 +1,1 @@
-C:/Users/Koushik Sai/OneDrive/Desktop/polymers/Rootmeanstderror/9_RgRootMeanStdError.py
+../../Rootmeanstderror/9_RgRootMeanStdError.py

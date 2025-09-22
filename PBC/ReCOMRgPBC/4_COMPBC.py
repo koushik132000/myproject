@@ -68,10 +68,10 @@ for i in range (0,41):
 			mzs=zs.iloc[c*20+b,0]
 
            # converting coordinates to angles 
-			thetax=2*PI*(mxs/xms)	
-			thetay=2*PI*(mys/yms)	
+			thetax=2*PI*(mxs/xms)
+			thetay=2*PI*(mys/yms)
 			thetaz=2*PI*(mzs/zms)
-   
+
 	       # calulating cosine and sine of angles
 			sxsc[c]+=math.cos(thetax)
 			sysc[c]+=math.cos(thetay)
@@ -94,8 +94,8 @@ for i in range (0,41):
 		tzss[c]=szss[c]/20
 
        # calculating the average angles
-		tavgx=math.atan2(-txss[c],-txsc[c])+PI	
-		tavgy=math.atan2(-tyss[c],-tysc[c])+PI	
+		tavgx=math.atan2(-txss[c],-txsc[c])+PI
+		tavgy=math.atan2(-tyss[c],-tysc[c])+PI
 		tavgz=math.atan2(-tzss[c],-tzsc[c])+PI
 
         # converting angles back to center of mass coordinates

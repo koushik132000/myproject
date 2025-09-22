@@ -1,1 +1,1 @@
-C:/Users/Koushik Sai/OneDrive/Desktop/polymers/chain_ini_ran/1_LC_Ini.c
+../../chain_ini_ran/1_LC_Ini.c

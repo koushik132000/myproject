@@ -1,1 +1,1 @@
-../Zwall/ReCOMRgPBC/5_RGZW.py
+../../Zwall/ReCOMRgZwall/5_RGZW.py
