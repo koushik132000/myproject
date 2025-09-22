@@ -1,1 +1,1 @@
-C:/Users/Koushik Sai/OneDrive/Desktop/polymers/Rootmeanstderror/10_Rgx_Rgy_Rgz.py
+../../Rootmeanstderror/10_Rgx_Rgy_Rgz.py

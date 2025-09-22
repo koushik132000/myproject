@@ -1,1 +1,1 @@
-C:/Users/Koushik Sai/OneDrive/Desktop/polymers/Zwall/ReCOMRgZwall/4_COMZW.py
+../../Zwall/ReCOMRgZwall/4_COMZW.py

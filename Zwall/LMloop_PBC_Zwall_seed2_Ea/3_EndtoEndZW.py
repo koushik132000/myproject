@@ -1,1 +1,1 @@
-../Zwall/ReCOMRgPBC/3_EndtoEndZW.py
+../../Zwall/ReCOMRgZwall/3_EndtoEndZW.py
