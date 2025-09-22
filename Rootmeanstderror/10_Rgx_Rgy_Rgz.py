@@ -3,6 +3,7 @@ import math
 import array
 import os
 import pandas as pd
+import numpy as np
 
 # setting current directory
 cwd = os.getcwd()
@@ -10,14 +11,14 @@ print(cwd)
 
 #creating a file 
 f = open("Rgxyz.csv","w")
-f.write("avg_Rgx2,avg_Rgy2,avg_Rgz2,diff,avg_Rg2/3\n")
+f.write("avg_Rgx2,avg_Rgy2,avg_Rgz2,SEx,SEy,SEz,avg_Rg2/3\n")
 
 #Running through each file
 for i in range(41):
     # creating arrays to store Rgxyz calculations
-    sxs = array.array('d',(0.0 for c in range(36)))
-    sys = array.array('d',(0.0 for c in range(36)))
-    szs = array.array('d',(0.0 for c in range(36)))
+    sxs = np.zeros(36)
+    sys = np.zeros(36)
+    szs = np.zeros(36)
 
     # Read the file
     pos = pd.read_csv(f"rg{i}.csv",dtype = {"c":int,"Rg":float,"Rgx":float,"Rgy":float,"Rgz":float})
@@ -25,7 +26,7 @@ for i in range(41):
     posy = pos[["Rgy"]]
     posz = pos[["Rgz"]]
 
-    #Running through each chain and finding out the squares
+    # finding out the squares
     for c in range(36):
         sxs[c] = posx.iloc[c,0]**2
         sys[c] = posy.iloc[c,0]**2
@@ -38,12 +39,16 @@ for i in range(41):
     for j in range(36):
         sumx += sxs[j];sumy += sys[j];sumz += szs[j]
 
-    #averaging over 36 chains and writing to the file
+    #averaging over 36 chains and finding standard error
     Rgx = sumx/36
     Rgy = sumy/36
     Rgz = sumz/36
     diff = abs(Rgx - Rgy)
     Rg = (Rgx + Rgy + Rgz)/3
-    f.write(f"{Rgx},{Rgy},{Rgz},{diff},{Rg}\n")
+    SEx = np.std(sxs,ddof =1)/math.sqrt(36)
+    SEy = np.std(sys,ddof=1)/math.sqrt(36)
+    SEz = np.std(szs,ddof=1)/math.sqrt(36)
+    
+    f.write(f"{Rgx},{Rgy},{Rgz},{SEx},{SEy},{SEz},{Rg}\n")
 f.close()
 print("exit")
