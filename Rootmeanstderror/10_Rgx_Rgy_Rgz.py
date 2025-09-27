@@ -52,3 +52,12 @@ for i in range(41):
     f.write(f"{Rgx},{Rgy},{Rgz},{SEx},{SEy},{SEz},{Rg}\n")
 f.close()
 print("exit")
+
+# to find the average of standard errors
+df = pd.read_csv("Rgxyz.csv")
+avgSEx = df["avg_Rgx2"].std(ddof=1)/math.sqrt(41)
+avgSEy = df["avg_Rgy2"].std(ddof=1)/math.sqrt(41)
+avgSEz = df["avg_Rgz2"].std(ddof=1)/math.sqrt(41)
+print("overall_SEX",avgSEx)
+print("overall_SEY",avgSEy)
+print("overall_SEZ",avgSEz)
