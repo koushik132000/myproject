@@ -83,7 +83,7 @@ int fcalc,lcalc;//First and last bead site index
 double dEf,dEl,dE;//Energy difference
 
 double Eb=0;//Bead attraction energy
-double Ex=0;//Bead overlap energy
+double Ex=200;//Bead overlap energy
 
 long seed;//seed for the ran2 generator
 	

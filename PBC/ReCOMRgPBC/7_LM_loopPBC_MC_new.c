@@ -460,7 +460,7 @@ int main()
 	}while (!feof(fptr));
 	fclose(fptr);
 
-	seed= -54321;
+	seed= -12345;
 	if (seed>=0)
 		seed=-1-seed;
 	for (i=0;i<100;i++)
