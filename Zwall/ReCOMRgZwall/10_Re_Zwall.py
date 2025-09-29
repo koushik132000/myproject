@@ -6,6 +6,7 @@
     #17-08-2025: corrected to proper minimum image convention for each bond vector
     #28-08-2025: Corrected to unwrap coordinates for end to end distance
     #30-08-2025: Removed the minimun image convention in z direction.
+    #29-09-2025: writing comments for clarity of pandas indexing, csv file indexing and adding header to rend files
 #Load math, pandas for reading csv, string, os
 import math
 import pandas as pd
@@ -32,6 +33,7 @@ for i in range(0, 41):
     # creating a file
     opfname=opname+str(i)+'.'+'csv'
     f = open(opfname, "w")
+    f.write(f"Re,Rx2,Ry2,Rz2\n")
 
     # Calculating the end-to-end distance
     for c in range(nchains):
@@ -75,8 +77,12 @@ for i in range(0, 41):
         Rz = zu - z0
 
         sq = math.sqrt(Rx*Rx + Ry*Ry + Rz*Rz)
+        Rx2 = Rx*Rx
+        Ry2 = Ry*Ry
+        Rz2 = Rz*Rz
+
         # writing the result to the file 
-        f.write(f"{sq}\n")
+        f.write(f"{sq},{Rx2},{Ry2},{Rz2}\n")
         print(sq)
     print("Exit")
     f.close();
