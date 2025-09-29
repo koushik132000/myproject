@@ -1,7 +1,7 @@
 //Program provides lattice moves of 36 chains in 7x7x20 lattice
 //Program introduces maxm mc moves and moves are accepted or rejected based on the metropolis algorithm
 //Creation Date:27Nov2024
-//Modified Date:21Aug2025
+//Modified Date:29Sep2025
 	//01-12-2024: Introduced subroutine to determine state of a lattice site
  	//05-12-2024: Open-MPI parallelisation is introduced
 	//06-12-2024: Pragma for directions introduced. fpos and npos have 6 direction values
@@ -15,7 +15,8 @@
 	//11-01-2025: Write the initial configuration before MC moves are executed
 	//21-02-2025: Updated comments for the program
 	//01-08-2025: Running for constant seed value
-	//05-08-2025: correction of cnum,findex,lindex,bnum for debugging 
+	//05-08-2025: correction of cnum,findex,lindex,bnum for debugging
+	//29-09-2025: Corrected neighborlist calculation in deltaE subroutine for +y and -y direction (previous one fails at y=0 and x!=0)
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -81,8 +82,8 @@ int pcalc;//Previous site index
 int fcalc,lcalc;//First and last bead site index
 double dEf,dEl,dE;//Energy difference
 
-double Eb=0;//Bead attraction energy
-double Ex=0;//Bead overlap energy
+double Eb = 0.00;//Bead attraction energy
+double Ex = 0.00;//Bead overlap energy
 
 long seed;//seed for the ran2 generator
 	
@@ -261,56 +262,74 @@ double deltaE(int olds,int news)
 	}
 	
 	//Neighbors of the old site
+	// +x direction
 	if((olds+1)%7!=0)
 		olist[0]=olds+1;
 	else
 		olist[0]=-1;
+	// -x direction
 	if(olds%7!=0)
 		olist[1]=olds-1;
 	else
 		olist[1]=-1;
-	if((olds+1)%49!=0)
-		olist[2]=olds+lx;
+	// +y
+	if ((olds % 49) < 42)
+		olist[2] = olds + lx;
 	else
-		olist[2]=-1;
-	if(olds%49!=0)
-		olist[3]=olds-lx;
+		olist[2] = -1;
+	// -y
+	if ((olds % 49) >= 7)
+		olist[3] = olds - lx;
 	else
-		olist[3]=-1;
+		olist[3] = -1;
+	// +z direction
 	if(olds<931)
 		olist[4]=olds+lx*ly;
 	else
 		olist[4]=-1;
+	// -z direction
 	if(olds>48)
 		olist[5]=olds-lx*ly;
 	else
 		olist[5]=-1;
 
 	//Neighbors of the new site
-	if((news+1)%7!=0)
-		nlist[0]=news+1;
+	// +x
+	if ((news+1) % 7 != 0)
+		nlist[0] = news + 1;
 	else
-		nlist[0]=-1;
-	if(news%7!=0)
-		nlist[1]=news-1;
+		nlist[0] = -1;
+
+	// -x
+	if (news % 7 != 0)
+		nlist[1] = news - 1;
 	else
-		nlist[1]=-1;
-	if((news+1)%49!=0)
-		nlist[2]=news+lx;
+		nlist[1] = -1;
+
+	// +y
+	if ((news % 49) < 42)
+		nlist[2] = news + lx;
 	else
-		nlist[2]=-1;
-	if(news%49!=0)
-		nlist[3]=news-lx;
+		nlist[2] = -1;
+
+	// -y
+	if ((news % 49) >= 7)
+		nlist[3] = news - lx;
 	else
-		nlist[3]=-1;
-	if(news<931)
-		nlist[4]=news+lx*ly;
+		nlist[3] = -1;
+
+	// +z
+	if (news < 931)
+		nlist[4] = news + lx*ly;
 	else
-		nlist[4]=-1;
-	if(news>48)
-		nlist[5]=news-lx*ly;
+		nlist[4] = -1;
+
+	// -z
+	if (news > 48)
+		nlist[5] = news - lx*ly;
 	else
-		nlist[5]=-1;
+		nlist[5] = -1;
+
 
 	//Number of neighbors in the old and new state
 	oldn=0;
