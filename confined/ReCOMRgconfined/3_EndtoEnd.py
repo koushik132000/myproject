@@ -2,7 +2,8 @@
 #The analysis is for confined chains
 #Box size is 7x7x20
 #Requires modified bead coordinate file for 36 chains
-#Modified Date:21Feb2025
+#Modified Date:29-09-2025
+	#29-09-2025: included header in rend files for rms calculation and its components
 
 #Load math, pandas for reading csv, string, os
 import math
@@ -27,7 +28,8 @@ for i in range (0,41):
     # Creating a file 
 	opfname=opname+str(i)+'.'+'csv'
 	f=open(opfname,"w")
-  
+	f.write(f"Re,Rx2,Ry2,Rz2\n")
+
     # Calculating the end-to-end distance
 	for c in range(36):
 		x0=pos.at[20*c,'x']
@@ -44,9 +46,12 @@ for i in range (0,41):
 		zdiff=zl-z0
 
 		sq=math.sqrt(xdiff*xdiff+ydiff*ydiff+zdiff*zdiff)
+		Rx2=xdiff*xdiff
+		Ry2=ydiff*ydiff
+		Rz2=zdiff*zdiff
 
 		# writing the end-to-end distance to the file 
-		f.write(f"{sq}\n")
+		f.write(f"{sq},{Rx2},{Ry2},{Rz2}\n")
 		print(sq)
 	print("Exit")
 	f.close();
