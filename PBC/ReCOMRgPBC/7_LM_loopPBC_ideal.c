@@ -1,6 +1,6 @@
 //Program provides lattice moves of 36 chains in 7x7x20 lattice
 //Creation Date:27Nov2024
-//Modified Date:28Aug2025
+//Modified Date:01Oct2025
 	//01-12-2024: Introduced subroutine to determine state of a lattice site
 	//05-12-2024: Open-MPI parallelisation is introduced
 	//06-12-2024: Pragma for directions introduced. fpos and npos have 6 direction values
@@ -16,7 +16,7 @@
 	//05-08-2025: correction of cnum,findex,lindex,bnum for debugging
 	//27-08-2025: Corrected deltaE subroutine for neighbor list calculation in y direction.
 	//28-08-2025: changed the energy paramerters to zero for ideal chains
-
+	//01-10-2025: Corrected overlap penalty calculation in deltaE subroutine for robustness
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -264,14 +264,15 @@ double deltaE(int olds,int news)
 	int oldn,newn;
 	int i;
 	double Ediff;
+	double overlap_penalty = 0.0;
 	//Coordinates of the old site (decoding)
 	int x_old = olds % lx;
 	int y_old = (olds / lx) % ly;
 	int z_old = olds / (lx*ly);
 
-	if(lcs.sz[news]>=1){
+	/*if(lcs.sz[news]>=1){
 		return lcs.sz[news]*Ex;
-	}
+	}*/
 	
 	//Neighbors of the old site
 	// +x and -x with PBC
@@ -350,9 +351,11 @@ double deltaE(int olds,int news)
 			newn+=lcs.sz[nlist[i]];
 		}	
 	}
-	
+	if (Ex != 0.0 && lcs.sz[news] >= 1) {
+		overlap_penalty = lcs.sz[news] * Ex;
+	}
 	//Energy difference
-	Ediff=(newn-oldn)*Eb;
+	Ediff=(newn-oldn)*Eb + overlap_penalty;
 	
 	return Ediff;
 }
@@ -461,7 +464,7 @@ int main()
 	}while (!feof(fptr));
 	fclose(fptr);
 
-	seed = -12345;
+	seed = -54321;
 	if (seed>=0)
 		seed=-1-seed;
 	for (i=0;i<100;i++)

@@ -1,7 +1,7 @@
 //Program provides lattice moves of 36 chains in 7x7x20 lattice
 //Program introduces maxm mc steps and moves are accepted or rejected based on the metropolis algorithm
 //Creation Date:27Nov2024
-//Modified Date:26Aug20255
+//Modified Date:01Oct20255
 	//01-12-2024: Introduced subroutine to determine state of a lattice site
  	//05-12-2024: Open-MPI parallelisation is introduced
 	//06-12-2024: Pragma for directions introduced. fpos and npos have 6 direction values
@@ -19,6 +19,7 @@
 	//20-05-2025: Bead-Wall interaction energy is introduced but not used
 	//01-08-2025: Running for constant seed value for debugging
 	//26-08-2025: Corrected deltaE subroutine for neighbor list calculation in y direction.
+	//01-10-2025: Corrected overlap penalty in delataE subroutine for robustness.
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -285,15 +286,16 @@ double deltaE(int olds,int news)
 	int oldn,newn;
 	int i;
 	double Ediff;
+	double overlap_penalty=0.0;
 	//Coordinates of the old site
 	int x_old = olds % lx;
 	int y_old = (olds / lx) % ly;
 	int z_old = olds / (lx*ly);
 
-	if(lcs.sz[news]>=1){
+	/*if(lcs.sz[news]>=1){
 		Ediff = lcs.sz[news]*Ex;
 		return Ediff;
-	}
+	}*/
 	
 	//Neighbors of the old site
 	// +x and -x with PBC
@@ -370,9 +372,11 @@ double deltaE(int olds,int news)
 			newn+=lcs.sz[nlist[i]];
 		}	
 	}
-
+	if (Ex != 0.0 && lcs.sz[news] >= 1) {
+	overlap_penalty = lcs.sz[news] * Ex;
+	}
 	//Energy difference	
-	Ediff=(newn-oldn)*Eb;
+	Ediff=(newn-oldn)*Eb + overlap_penalty;
 	return Ediff;
 }
 
