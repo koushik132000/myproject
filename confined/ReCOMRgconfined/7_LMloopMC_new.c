@@ -83,7 +83,7 @@ int fcalc,lcalc;//First and last bead site index
 double dEf,dEl,dE;//Energy difference
 
 double Eb = 0.00;//Bead attraction energy
-double Ex = 200;//Bead overlap energy
+double Ex = 0.00;//Bead overlap energy
 
 long seed;//seed for the ran2 generator
 	
@@ -256,10 +256,12 @@ double deltaE(int olds,int news)
 	int i;
 	double Ediff;
 
-	if(lcs.sz[news]>=1){
-		Ediff = lcs.sz[news]*Ex;
-		return Ediff;
-	}
+	/* if(lcs.sz[news]>=1){
+		 Ediff = lcs.sz[news]*Ex; 
+		 return Ediff; }*/
+    if (Ex != 0.0 && lcs.sz[news] >= 1) {
+        return (double)lcs.sz[news] * Ex;
+    }
 	
 	//Neighbors of the old site
 	// +x direction
@@ -452,7 +454,7 @@ int main()
 	}while (!feof(fptr));
 	fclose(fptr);
 
-	seed=-54321;//Set a specific seed for reproducibility
+	seed=-12345;//Set a specific seed for reproducibility
 	if (seed>=0)
 		seed=-1-seed;
 
