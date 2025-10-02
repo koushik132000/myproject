@@ -37,9 +37,9 @@ for i in range (0,41):
 	sys=array.array('d',(0.0 for c in range(0,36)))
 	szs=array.array('d',(0.0 for c in range(0,36)))
 	crg=array.array('d',(0.0 for c in range(0,36)))
-	Rgx=array.array('d',(0.0 for c in range(0,36)))
-	Rgy=array.array('d',(0.0 for c in range(0,36)))
-	Rgz=array.array('d',(0.0 for c in range(0,36)))
+	Rgx2=array.array('d',(0.0 for c in range(0,36)))
+	Rgy2=array.array('d',(0.0 for c in range(0,36)))
+	Rgz2=array.array('d',(0.0 for c in range(0,36)))
 	
     # Read the center of mass and position files
 	infcom=icom+"_"+str(i)+'.'+'csv'
@@ -56,7 +56,7 @@ for i in range (0,41):
     # Open the output file for writing
 	opfname=opname+str(i)+'.'+'csv'
 	f=open(opfname,"w")
-	f.write(f"c,Rg,Rgx,Rgy,Rgz\n")
+	f.write(f"Rg,Rgx2,Rgy2,Rgz2\n")
  
     # Calculating the radius of gyration for each chain
 	for c in range(36):
@@ -76,10 +76,10 @@ for i in range (0,41):
 		print(sxs[c],sys[c],szs[c])			
 	for c in range(36):
 		crg[c]=math.sqrt(sxs[c]/20+sys[c]/20+szs[c]/20)
-		Rgx[c] = math.sqrt(sxs[c]/20)
-		Rgy[c] = math.sqrt(sys[c]/20)
-		Rgz[c] = math.sqrt(szs[c]/20)
+		Rgx2[c] = sxs[c]/20
+		Rgy2[c] = sys[c]/20
+		Rgz2[c] = szs[c]/20
         # Writing the results to the output file
-		f.write(f"{c},{crg[c]},{Rgx[c]},{Rgy[c]},{Rgz[c]}\n")
+		f.write(f"{crg[c]},{Rgx2[c]},{Rgy2[c]},{Rgz2[c]}\n")
 	print("Exit")
 	f.close()

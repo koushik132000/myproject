@@ -89,7 +89,7 @@ double dEf,dEl,dE;//Energy difference
 //Negative values indicate attraction
 //Positive values indicate repulsion
 double Ea=-2.352;//Bead-Wall interaction energy
-double Eb= -0.457;//Bead-Bead interaction energy
+double Eb= 0.00;//Bead-Bead interaction energy
 double Ex= 0.00;//Bead overlap energy
 
 long seed;//seed for the ran2 generator

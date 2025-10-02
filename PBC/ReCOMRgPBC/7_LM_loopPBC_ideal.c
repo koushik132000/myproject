@@ -82,7 +82,7 @@ int pcalc;//Previous site index
 int fcalc,lcalc;//First and last bead site index
 double dEf,dEl,dE;//Energy difference
 
-double Eb=-0.457;//Bead attraction energy
+double Eb=0.00;//Bead attraction energy
 double Ex=0.00;//Bead overlap energy
 
 long seed;//seed for the ran2 generator
@@ -464,7 +464,7 @@ int main()
 	}while (!feof(fptr));
 	fclose(fptr);
 
-	seed = -54321;
+	seed = -12345;
 	if (seed>=0)
 		seed=-1-seed;
 	for (i=0;i<100;i++)
@@ -502,7 +502,7 @@ int main()
 		if (printed == 0) {
 		printf("First-bead move check: chain=%d  dir=%d  olds=%d  news=%d  deltaE=%.6f\n",cnum, findex, fcalc, scalc, dEf);
 		printed = 1;
-}
+	}
 		if(metrop(dEf)==1){	
 			scalc=fpos.ex+lx*fpos.ey+lx*ly*fpos.ez;
 			accmov(cnum,0,fcalc,scalc,fpos);
