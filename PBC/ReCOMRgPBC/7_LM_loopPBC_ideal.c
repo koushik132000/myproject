@@ -83,7 +83,7 @@ int fcalc,lcalc;//First and last bead site index
 double dEf,dEl,dE;//Energy difference
 
 double Eb=0.00;//Bead attraction energy
-double Ex=0.00;//Bead overlap energy
+double Ex=200.00;//Bead overlap energy
 
 long seed;//seed for the ran2 generator
 	
@@ -351,6 +351,8 @@ double deltaE(int olds,int news)
 			newn+=lcs.sz[nlist[i]];
 		}	
 	}
+	oldn-=1;
+	newn+=1;
 	if (Ex != 0.0 && lcs.sz[news] >= 1) {
 		overlap_penalty = lcs.sz[news] * Ex;
 	}
@@ -464,7 +466,7 @@ int main()
 	}while (!feof(fptr));
 	fclose(fptr);
 
-	seed = -12345;
+	seed = -54321;
 	if (seed>=0)
 		seed=-1-seed;
 	for (i=0;i<100;i++)

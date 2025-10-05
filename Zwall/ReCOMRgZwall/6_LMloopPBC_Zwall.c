@@ -1,7 +1,7 @@
 //Program provides lattice moves of 36 chains in 7x7x20 lattice
 //Program introduces maxm mc steps and moves are accepted or rejected based on the metropolis algorithm
 //Creation Date:27Nov2024
-//Modified Date:01Oct20255
+//Modified Date:01Oct2025
 	//01-12-2024: Introduced subroutine to determine state of a lattice site
  	//05-12-2024: Open-MPI parallelisation is introduced
 	//06-12-2024: Pragma for directions introduced. fpos and npos have 6 direction values
@@ -90,7 +90,7 @@ double dEf,dEl,dE;//Energy difference
 //Positive values indicate repulsion
 double Ea=-2.352;//Bead-Wall interaction energy
 double Eb= 0.00;//Bead-Bead interaction energy
-double Ex= 0.00;//Bead overlap energy
+double Ex= 200.00;//Bead overlap energy
 
 long seed;//seed for the ran2 generator
 	
@@ -372,6 +372,9 @@ double deltaE(int olds,int news)
 			newn+=lcs.sz[nlist[i]];
 		}	
 	}
+	oldn-=1;
+	newn+=1;
+
 	if (Ex != 0.0 && lcs.sz[news] >= 1) {
 	overlap_penalty = lcs.sz[news] * Ex;
 	}
