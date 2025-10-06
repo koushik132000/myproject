@@ -18,14 +18,14 @@ print("1", cwd)
 ipname='mchains'
 opname='com'
 
-xmax=7
-ymax=7
-zmax=20
+xmax=6
+ymax=6
+zmax=19
 
-# adjusting the box size for periodic boundary conditions
-xms=xmax+0.5
-yms=ymax+0.5
-zms=zmax+0.5
+# adjusting the box size for periodic boundary conditions 	
+xms=xmax
+yms=ymax
+zms=zmax
 
 PI=math.pi
 
@@ -52,9 +52,9 @@ for i in range (0,41):
    # Reading data from the input file and translating coordinates
 	infname=ipname+str(i)+'.'+'csv'
 	pos=pd.read_csv(infname,dtype={"x":float,"y":float,"z":float})
-	xs=pos[['x']]+0.5
-	ys=pos[['y']]+0.5
-	zs=pos[['z']]+0.5
+	xs=(pos[['x']]+0.5)%xmax
+	ys=(pos[['y']]+0.5)%ymax
+	zs=(pos[['z']]+0.5)%zmax
 	
     # creating and writing to a file
 	opfname=opname+"_"+str(i)+'.'+'csv'
@@ -85,7 +85,7 @@ for i in range (0,41):
 
 	for c in range(36):
         # calculating the average values
-		txsc[c]=sxsc[c]/20	
+		txsc[c]=sxsc[c]/20
 		tysc[c]=sysc[c]/20
 		tzsc[c]=szsc[c]/20
 

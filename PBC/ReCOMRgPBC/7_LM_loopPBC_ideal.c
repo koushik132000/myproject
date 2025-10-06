@@ -27,7 +27,8 @@
 
 #define nc 36//number of chains
 #define bc 20//number of beads per chain
-#define lx 7//box size in x-direction
+// box size is based on no of lattice sites
+#define lx 7//box size in x-direction 
 #define ly 7//box size in y-direction
 #define lz 20//box size in z-direction
 #define ns 980//number of sites 
@@ -106,7 +107,7 @@ void sstate()
 			xval=beads[i].x[j];
 			yval=beads[i].y[j];
 			zval=beads[i].z[j];			
-			k=xval+lx*yval+lx*ly*zval;
+			k=xval+lx*yval+lx*ly*zval; // k = [0,979]
 			lcs.sx[k]=i;
 			lcs.sy[k]=j;
 			lcs.sz[k]+=1;
@@ -189,7 +190,7 @@ void nmoves(int cnum,int r)
 		npos.ez=beads[cnum].z[nb];	
 	}
 	
-	//Periodic boundary condition
+	//Periodic boundary condition, here lx -1,ly-1,lz-1 are the box sizes
 	if(npos.ex<0)
 		npos.ex=lx-1;
 	if(npos.ey<0)
@@ -241,7 +242,7 @@ void kmoves(int cnum, int k)
 		kpos.ez=beads[cnum].z[k];	
 	}
 	
-	//Periodic boundary condition
+	//Periodic boundary condition, here lx -1,ly-1,lz-1 are the box sizes
 	if(kpos.ex<0)
 		kpos.ex=lx-1;
 	if(kpos.ey<0)
@@ -265,7 +266,7 @@ double deltaE(int olds,int news)
 	int i;
 	double Ediff;
 	double overlap_penalty = 0.0;
-	//Coordinates of the old site (decoding)
+	//Coordinates of the old site (decoding) , lx,ly,lz are no of lattice sites in x,y,z direction
 	int x_old = olds % lx;
 	int y_old = (olds / lx) % ly;
 	int z_old = olds / (lx*ly);

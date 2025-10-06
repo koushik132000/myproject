@@ -20,13 +20,13 @@ ipname='mchains'
 icom='com'
 opname='rg'
 
-xmax=7.0
-ymax=7.0
-zmax=20.0
+xmax=6
+ymax=6
+zmax=19
 
-xms=xmax+0.5
-yms=ymax+0.5
-zms=zmax+0.5
+xms=xmax
+yms=ymax
+zms=zmax
 
 def apply_pbc(diff,box_length):
 	return diff - box_length * round(diff / box_length)
@@ -49,9 +49,9 @@ for i in range (0,41):
 	comz=com[['z']]
 	infname=ipname+str(i)+'.'+'csv'
 	pos=pd.read_csv(infname,dtype={"x":float,"y":float,"z":float})
-	xs=pos[['x']]+0.5
-	ys=pos[['y']]+0.5
-	zs=pos[['z']]+0.5
+	xs=(pos[['x']]+0.5)%xmax
+	ys=(pos[['y']]+0.5)%ymax
+	zs=(pos[['z']]+0.5)%zmax
 	
     # Open the output file for writing
 	opfname=opname+str(i)+'.'+'csv'
