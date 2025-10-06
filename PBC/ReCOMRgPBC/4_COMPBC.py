@@ -23,9 +23,9 @@ ymax=6
 zmax=19
 
 # adjusting the box size for periodic boundary conditions 	
-xms=xmax
-yms=ymax
-zms=zmax
+xms= 7.0
+yms= 7.0
+zms= 20.0
 
 PI=math.pi
 

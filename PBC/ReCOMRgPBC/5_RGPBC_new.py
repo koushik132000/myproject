@@ -24,9 +24,9 @@ xmax=6
 ymax=6
 zmax=19
 
-xms=xmax
-yms=ymax
-zms=zmax
+xms= 7.0
+yms= 7.0 
+zms= 20.0
 
 def apply_pbc(diff,box_length):
 	return diff - box_length * round(diff / box_length)
