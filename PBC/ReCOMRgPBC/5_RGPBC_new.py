@@ -49,9 +49,9 @@ for i in range (0,41):
 	comz=com[['z']]
 	infname=ipname+str(i)+'.'+'csv'
 	pos=pd.read_csv(infname,dtype={"x":float,"y":float,"z":float})
-	xs=(pos[['x']]+0.5)%xmax
-	ys=(pos[['y']]+0.5)%ymax
-	zs=(pos[['z']]+0.5)%zmax
+	xs=(pos[['x']]+0.5)%xms 
+	ys=(pos[['y']]+0.5)%yms
+	zs=(pos[['z']]+0.5)%zms
 	
     # Open the output file for writing
 	opfname=opname+str(i)+'.'+'csv'
@@ -66,9 +66,9 @@ for i in range (0,41):
 			zdiff=comz.iloc[c,0]-zs.iloc[c*20+b,0]
 
             # Applying periodic boundary conditions
-			xdiff=apply_pbc(xdiff, xms)
-			ydiff=apply_pbc(ydiff, yms)
-			zdiff=apply_pbc(zdiff, zms)
+			xdiff=apply_pbc(xdiff, xmax)
+			ydiff=apply_pbc(ydiff, ymax)
+			zdiff=apply_pbc(zdiff, zmax)
 
 			sxs[c]+=xdiff*xdiff
 			sys[c]+=ydiff*ydiff

@@ -31,7 +31,7 @@ for i in range (0,41):
     # creating a file
 	opfname=opname+str(i)+'.'+'csv'
 	f=open(opfname,"w")
-
+	f.write(f"Re,Rx2,Ry2,Rz2\n")
     # Calculating the end-to-end distance
 	for c in range(36):
 		x0=pos.at[20*c,'x']
@@ -64,8 +64,11 @@ for i in range (0,41):
 			zdiff=zdiff+zmax
 		
 		sq=math.sqrt(xdiff*xdiff+ydiff*ydiff+zdiff*zdiff)
+		Rx2 = xdiff*xdiff
+		Ry2 = ydiff*ydiff
+		Rz2 = zdiff*zdiff
         # writing the result to the file 
-		f.write(f"{sq}\n")
+		f.write(f"{sq},{Rx2},{Ry2},{Rz2}\n")
 		print(sq)
 	print("Exit")
 	f.close();

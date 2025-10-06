@@ -107,7 +107,7 @@ void sstate()
 			xval=beads[i].x[j];
 			yval=beads[i].y[j];
 			zval=beads[i].z[j];			
-			k=xval+lx*yval+lx*ly*zval; // k = [0,979]
+			k=xval+lx*yval+lx*ly*zval; // k = [0,979] encoding
 			lcs.sx[k]=i;
 			lcs.sy[k]=j;
 			lcs.sz[k]+=1;
@@ -496,7 +496,7 @@ int main()
         fclose(fptw);
 	do{
 		//Randomly choose a chain	
-		cnum = (int)(ran2(&seed)*nc);
+		cnum =(int)(ran2(&seed)*nc);
 		//Move the first bead
 		dEf=0.0;
 		fcalc=beads[cnum].x[0]+lx*beads[cnum].y[0]+lx*ly*beads[cnum].z[0];

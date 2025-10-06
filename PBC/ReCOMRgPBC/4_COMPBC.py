@@ -18,9 +18,9 @@ print("1", cwd)
 ipname='mchains'
 opname='com'
 
-xmax=6
-ymax=6
-zmax=19
+xmax=7
+ymax=7
+zmax=20
 
 # adjusting the box size for periodic boundary conditions 	
 xms= 7.0
@@ -52,10 +52,11 @@ for i in range (0,41):
    # Reading data from the input file and translating coordinates
 	infname=ipname+str(i)+'.'+'csv'
 	pos=pd.read_csv(infname,dtype={"x":float,"y":float,"z":float})
-	xs=(pos[['x']]+0.5)%xmax
+	# Translate by +0.5 
+	xs=(pos[['x']]+0.5)%xmax 
 	ys=(pos[['y']]+0.5)%ymax
 	zs=(pos[['z']]+0.5)%zmax
-	
+
     # creating and writing to a file
 	opfname=opname+"_"+str(i)+'.'+'csv'
 	f=open(opfname,"w")
