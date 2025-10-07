@@ -18,7 +18,7 @@ print("Working in", cwd)
 ipname = 'mchains'
 opname = 'rend'
 
-xmax, ymax, zmax = 6.0, 6.0, 19.0
+xmax, ymax, zmax = 7.0, 7.0, 20.0
 nb = 20
 nchains = 36
 
@@ -61,9 +61,20 @@ for i in range(0, 41): #i from 0 to 40
             dz = zk - pz
 
             # minimum image for each bond vector
-            dx = dx - xmax * round(dx / xmax)
-            dy = dy - ymax * round(dy / ymax)
-            dz = dz - zmax * round(dz / zmax)
+            if dx > xmax / 2:
+                dx -= xmax
+            elif dx < -xmax / 2:
+                dx += xmax
+
+            if dy > ymax / 2:
+                dy -= ymax
+            elif dy < -ymax / 2:
+                dy += ymax
+
+            if dz > zmax / 2:
+                dz -= zmax
+            elif dz < -zmax / 2:
+                dz += zmax
 
             # adding up to build unwrapped coordinates
             xu += dx

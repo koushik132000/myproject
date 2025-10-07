@@ -53,9 +53,9 @@ for i in range (0,41):
 	infname=ipname+str(i)+'.'+'csv'
 	pos=pd.read_csv(infname,dtype={"x":float,"y":float,"z":float})
 	# Translate by +0.5 
-	xs=(pos[['x']]+0.5)%xmax
-	ys=(pos[['y']]+0.5)%ymax
-	zs=(pos[['z']]+0.5)%zmax
+	xs=(pos[['x']]+0.5)
+	ys=(pos[['y']]+0.5)
+	zs=(pos[['z']]+0.5)
 
     # creating and writing to a file
 	opfname=opname+"_"+str(i)+'.'+'csv'

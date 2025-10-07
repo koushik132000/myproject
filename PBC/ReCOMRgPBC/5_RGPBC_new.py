@@ -49,9 +49,9 @@ for i in range (0,41):
 	comz=com[['z']]
 	infname=ipname+str(i)+'.'+'csv'
 	pos=pd.read_csv(infname,dtype={"x":float,"y":float,"z":float})
-	xs=(pos[['x']]+0.5)%xmax
-	ys=(pos[['y']]+0.5)%ymax
-	zs=(pos[['z']]+0.5)%zmax
+	xs=(pos[['x']]+0.5)
+	ys=(pos[['y']]+0.5)
+	zs=(pos[['z']]+0.5)
 	
     # Open the output file for writing
 	opfname=opname+str(i)+'.'+'csv'
@@ -65,10 +65,21 @@ for i in range (0,41):
 			ydiff=comy.iloc[c,0]-ys.iloc[c*20+b,0]
 			zdiff=comz.iloc[c,0]-zs.iloc[c*20+b,0]
 
-            # Applying periodic boundary conditions
-			xdiff=apply_pbc(xdiff, xmax)
-			ydiff=apply_pbc(ydiff, ymax)
-			zdiff=apply_pbc(zdiff, zmax)
+	# Apply minimum image convention
+			if xdiff > xmax / 2: 
+				xdiff -= xmax
+			elif xdiff < -xmax / 2: 
+				xdiff += xmax
+
+			if ydiff > ymax / 2: 
+				ydiff -= ymax
+			elif ydiff < -ymax / 2: 
+				ydiff += ymax
+
+			if zdiff > zmax / 2: 
+				zdiff -= zmax
+			elif zdiff < -zmax / 2: 
+				zdiff += zmax
 
 			sxs[c]+=xdiff*xdiff
 			sys[c]+=ydiff*ydiff
