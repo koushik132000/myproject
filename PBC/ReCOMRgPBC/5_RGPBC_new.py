@@ -20,16 +20,9 @@ ipname='mchains'
 icom='com'
 opname='rg'
 
-xmax=6
-ymax=6
-zmax=19
-
-xms= 7.0
-yms= 7.0 
-zms= 20.0
-
-def apply_pbc(diff,box_length):
-	return diff - box_length * round(diff / box_length)
+xmax=7
+ymax=7
+zmax=20
 
 for i in range (0,41):
     # Intialize arrays of doubles

@@ -27,7 +27,6 @@
 
 #define nc 36//number of chains
 #define bc 20//number of beads per chain
-// box size is based on no of lattice sites
 #define lx 7//box size in x-direction 
 #define ly 7//box size in y-direction
 #define lz 20//box size in z-direction

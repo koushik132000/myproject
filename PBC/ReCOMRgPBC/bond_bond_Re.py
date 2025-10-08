@@ -37,19 +37,19 @@ for i in range(0, 41): #i from 0 to 40
     # Calculating the end-to-end distance
     for c in range(nchains): # c from 0 to 35
         # wrapped first bead for unwrapping reference
-        x0 = pos.at[20*c, 'x']
-        y0 = pos.at[20*c, 'y']
-        z0 = pos.at[20*c, 'z']
+        xs = pos.at[20*c, 'x']
+        ys = pos.at[20*c, 'y']
+        zs = pos.at[20*c, 'z']
 
         # start unwrapped coords at the first bead
-        xu = x0
-        yu = y0
-        zu = z0
+        xu = xs
+        yu = ys
+        zu = zs
 
         # moving through the bonds, using MIC for each bond vector
-        px = x0
-        py = y0
-        pz = z0 
+        px = xs
+        py = ys
+        pz = zs 
 
         for k in range(1, nb): # k from 1 to 19
             xk = pos.at[20*c + k, 'x']
@@ -83,9 +83,9 @@ for i in range(0, 41): #i from 0 to 40
             px = xk; py = yk; pz = zk
 
         # end-to-end vector from unwrapped endpoints
-        Rx = xu - x0
-        Ry = yu - y0
-        Rz = zu - z0
+        Rx = xu - xs
+        Ry = yu - ys
+        Rz = zu - zs
 
         sq = math.sqrt(Rx*Rx + Ry*Ry + Rz*Rz)
         Rx2 = Rx*Rx

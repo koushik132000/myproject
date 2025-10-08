@@ -18,10 +18,6 @@ print("1", cwd)
 ipname='mchains'
 opname='com'
 
-xmax=6
-ymax=6
-zmax=19
-
 # adjusting the box size for periodic boundary conditions 	
 xms=7
 yms=7
