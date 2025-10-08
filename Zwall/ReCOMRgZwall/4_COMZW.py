@@ -17,12 +17,9 @@ print("1", cwd)
 ipname='mchains'
 opname='com'
 
-xmax=7
-ymax=7
-
 # adjusting the box size for periodic boundary conditions 
-xms=xmax+0.5
-yms=ymax+0.5
+xms=7
+yms=7
 
 PI=math.pi
 
@@ -63,8 +60,8 @@ for i in range (0,41):
 			mzs=zs.iloc[c*20+b,0]
 
 			# convert coordinates to angles
-			thetax=2*PI*(mxs/xms)	
-			thetay=2*PI*(mys/yms)	
+			thetax=2*PI*(mxs/xms)
+			thetay=2*PI*(mys/yms)
 	
 			# calculating the cosine and sine of the angles
 			sxsc[c]+=math.cos(thetax)

@@ -32,18 +32,18 @@ for i in range (0,41):
 
     # Calculating the end-to-end distance
 	for c in range(36):
-		x0=pos.at[20*c,'x']
-		y0=pos.at[20*c,'y']
-		z0=pos.at[20*c,'z']
-		print(x0,y0,z0)
+		xs=pos.at[20*c,'x']
+		ys=pos.at[20*c,'y']
+		zs=pos.at[20*c,'z']
+		print(xs,ys,zs)
 		xl=pos.at[20*c+19,'x']
 		yl=pos.at[20*c+19,'y']
 		zl=pos.at[20*c+19,'z']
 		print(xl,yl,zl)
 
-		xdiff=xl-x0
-		ydiff=yl-y0
-		zdiff=zl-z0
+		xdiff=xl-xs
+		ydiff=yl-ys
+		zdiff=zl-zs
 
 		sq=math.sqrt(xdiff*xdiff+ydiff*ydiff+zdiff*zdiff)
 		Rx2=xdiff*xdiff

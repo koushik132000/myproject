@@ -24,9 +24,9 @@ xmax=7.0
 ymax=7.0
 zmax=20.0
 
-xms=xmax+0.5
-yms=ymax+0.5
-zms=zmax+0.5
+xms=7.0
+yms=7.0
+zms=20.0
 
 def apply_pbc(diff,box_length):
 	return diff - box_length * round(diff / box_length)
@@ -65,9 +65,16 @@ for i in range (0,41):
 			ydiff=comy.iloc[c,0]-ys.iloc[c*20+b,0]
 			zdiff=comz.iloc[c,0]-zs.iloc[c*20+b,0]
 
-            # Applying periodic boundary conditions
-			xdiff=apply_pbc(xdiff, xms)
-			ydiff=apply_pbc(ydiff, yms)
+	# Apply minimum image convention
+			if xdiff > xmax / 2: 
+				xdiff -= xmax
+			elif xdiff < -xmax / 2: 
+				xdiff += xmax
+
+			if ydiff > ymax / 2: 
+				ydiff -= ymax
+			elif ydiff < -ymax / 2: 
+				ydiff += ymax
 
 			sxs[c]+=xdiff*xdiff
 			sys[c]+=ydiff*ydiff

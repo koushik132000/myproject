@@ -38,19 +38,19 @@ for i in range(0, 41):
     # Calculating the end-to-end distance
     for c in range(nchains):
         # wrapped first bead for unwrapping reference
-        x0 = pos.at[20*c, 'x']
-        y0 = pos.at[20*c, 'y']
-        z0 = pos.at[20*c, 'z']
+        xs = pos.at[20*c, 'x']
+        ys = pos.at[20*c, 'y']
+        zs = pos.at[20*c, 'z']
 
         # start unwrapped coords at the first bead
-        xu = x0
-        yu = y0
-        zu = z0
+        xu = xs
+        yu = ys
+        zu = zs
 
         # moving through the bonds, using MIC for each bond vector
-        px = x0
-        py = y0
-        pz = z0  # previous wrapped bead
+        px = xs
+        py = ys
+        pz = zs  # previous wrapped bead
 
         for k in range(1, nb):
             xk = pos.at[20*c + k, 'x']
@@ -62,8 +62,15 @@ for i in range(0, 41):
             dz = zk - pz
 
             # minimum image for each bond vector
-            dx = dx - xmax * round(dx / xmax)
-            dy = dy - ymax * round(dy / ymax)
+            if dx > xmax / 2:
+                dx -= xmax
+            elif dx < -xmax / 2:
+                dx += xmax
+
+            if dy > ymax / 2:
+                dy -= ymax
+            elif dy < -ymax / 2:
+                dy += ymax
                    
             # adding up to build unwrapped coordinates
             xu += dx
@@ -72,9 +79,9 @@ for i in range(0, 41):
             px = xk; py = yk; pz = zk
 
         # end-to-end vector from unwrapped endpoints
-        Rx = xu - x0
-        Ry = yu - y0
-        Rz = zu - z0
+        Rx = xu - xs
+        Ry = yu - ys
+        Rz = zu - zs
 
         sq = math.sqrt(Rx*Rx + Ry*Ry + Rz*Rz)
         Rx2 = Rx*Rx
