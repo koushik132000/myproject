@@ -286,7 +286,7 @@ double deltaE(int olds,int news)
 	int oldn,newn;
 	int i;
 	double Ediff;
-	double overlap_penalty=0.0;
+	double overlap_penalty = 0.0;
 	//Coordinates of the old site
 	int x_old = olds % lx;
 	int y_old = (olds / lx) % ly;
