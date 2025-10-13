@@ -19,9 +19,9 @@ ipname='mchains'
 opname='com'
 
 # adjusting the box size for periodic boundary conditions 	
-xms=7
-yms=7
-zms=20
+xms=7.5
+yms=7.5
+zms=20.5
 
 PI=math.pi
 

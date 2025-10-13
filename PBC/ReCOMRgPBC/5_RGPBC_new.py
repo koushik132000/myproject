@@ -20,9 +20,9 @@ ipname='mchains'
 icom='com'
 opname='rg'
 
-xmax=7
-ymax=7
-zmax=20
+xmax=7.5
+ymax=7.5
+zmax=20.5
 
 for i in range (0,41):
     # Intialize arrays of doubles

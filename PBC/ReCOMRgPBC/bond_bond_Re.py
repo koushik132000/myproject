@@ -18,7 +18,7 @@ print("Working in", cwd)
 ipname = 'mchains'
 opname = 'rend'
 
-xmax, ymax, zmax = 7.0, 7.0, 20.0
+xmax, ymax, zmax = 7.5, 7.5, 20.5
 nb = 20
 nchains = 36
 
